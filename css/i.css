@@ -461,7 +461,7 @@ html, body { height: 100%; }
 
 .va-middle { vertical-align: middle; }
 
-header { min-height: 100%; -webkit-background-size: cover; background-size: cover; }
+header { min-height: 100%; background: url(../img/lumber.jpg) no-repeat center; -webkit-background-size: cover; background-size: cover; }
 
 .browser-box { padding-bottom: 0; }
 
