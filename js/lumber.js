@@ -36,7 +36,7 @@ function lumber_barChart(chartDiv) {
     .range([height, 0]);
 
   var xAxis = d3.svg.axis().scale(x).orient("bottom");
-  var yAxis = d3.svg.axis().scale(y).orient("left").ticks(10, "%");
+  var yAxis = d3.svg.axis().scale(y).orient("left").ticks(2, "%");
 
   x.domain(lumber.data.map(function(d) { return d; }))
   y.domain([0, d3.max(lumber.data, function(d) { return d; })])
