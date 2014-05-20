@@ -21,9 +21,11 @@ function lumber_graph(chartDiv) {
   lumber.height = chartDiv.attr("data-height") || 250;
   lumber.type   = chartDiv.attr("data-type") || "bar";
 
-  if (lumber.type == "bar") {
-    lumber.barChart(chartDiv);
-  }
+  if (lumber.type == "bar")              { lumber.barChart(chartDiv);    }
+  else if (lumber.type == "pie")         { lumber.pieChart(chartDiv);    }
+  else if (lumber.type == "line")         { lumber.lineChart(chartDiv);  }
+  else if (lumber.type == "histogram")   { lumber.histogram(chartDiv);   }
+  else if (lumber.type == "scatterplot") { lumber.scatterplot(chartDiv); }
 }
 
 lumber.barChart = lumber_barChart;
@@ -73,6 +75,26 @@ function lumber_barChart(chartDiv) {
       .attr("y", function(d) { return y(d); })
       .attr("height", function(d) { return height - y(d); })
       .attr("width", x.rangeBand());
+}
+
+lumber.pieChart = lumber_pieChart;
+function lumber_pieChart(chartDiv) {
+  // ...
+}
+
+lumber.lineChart = lumber_lineChart;
+function lumber_lineChart(chartDiv) {
+  // ...
+}
+
+lumber.histogram = lumber_histogram;
+function lumber_histogram(chartDiv) {
+  // ...
+}
+
+lumber.scatterplot = lumber_scatterplot;
+function lumber_scatterplot(chartDiv) {
+  // ...
 }
 
 function type(d) {
