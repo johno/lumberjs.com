@@ -25,39 +25,56 @@ function lumber_graph(chartDiv) {
 
 lumber.barChart = lumber_barChart;
 function lumber_barChart(chartDiv) {
-  chartDiv.attr("width", lumber.width);
-  chartDiv.attr("height", lumber.height);
-
   var margin = {top: 20, right: 30, bottom: 30, left: 40},
       width = lumber.width - margin.left - margin.right,
       height = lumber.height - margin.top - margin.bottom;
 
-
+  var x = d3.scale.ordinal()
+    .rangeRoundBands([0, width], .1);
 
   var y = d3.scale.linear()
-    .range([lumber.height, 0]);
+    .range([height, 0]);
 
-  // This utilizes parseInt() in order to coerce numeric ordering rather than
-  // d3's natural order default. This will likely need to be handled more elegantly.
-  y.domain([0, d3.max(lumber.data, function(d) { return parseInt(d); })]);
+  var xAxis = d3.svg.axis().scale(x).orient("bottom");
+  var yAxis = d3.svg.axis().scale(y).orient("left").ticks(10, "%");
 
-  var barWidth = lumber.width / lumber.data.length;
+  var chart = chartDiv
+      .attr("width", lumber.width)
+      .attr("height", lumber.height)
+    .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 
-  var bar = chartDiv.selectAll("g")
+  x.domain(lumber.data.map(function(d) { return d; }))
+  y.domain([0, d3.max(lumber.data, function(d) { return d; })])
+
+  chart.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+
+  chart.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
+    .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("Frequency");
+
+  chart.selectAll(".bar")
       .data(lumber.data)
-    .enter().append("g")
-      .attr("transform", function(d, i) { return "translate(" + i * barWidth + ",0)"; });
-
-  bar.append("rect")
+    .enter().append("rect")
+      .attr("class", "bar")
+      .attr("x", function(d) { return x(d); })
       .attr("y", function(d) { return y(d); })
-      .attr("height", function(d) { return lumber.height - y(d); })
-      .attr("width", barWidth - 1);
+      .attr("height", function(d) { return height - y(d); })
+      .attr("width", x.rangeBand());
+}
 
-  bar.append("text")
-      .attr("x", barWidth / 2)
-      .attr("y", function(d) { return y(d) + 3; })
-      .attr("dy", ".75em")
-      .text(function(d) { return d; });
+function type(d) {
+  d.value = +d.value; // coerce to number
+  return d;
 }
 
 if (!hasLumberDependencies()) {

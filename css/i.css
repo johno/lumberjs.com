@@ -414,7 +414,7 @@ strong, .bold { font-weight: bold; }
 
 .bg-orange { background-color: #ffcc22; }
 
-body { color: #16a085; background-color: #fff; }
+body { color: #95a5a6; background-color: #fff; }
 
 a { color: #16a085; text-decoration: none; }
 a:hover { color: #107360; }
@@ -446,9 +446,15 @@ a:hover { color: #107360; }
 
 .lumber div { font: 10px sans-serif; background-color: #1abc9c; text-align: right; padding: 3px; margin: 1px; color: #ecf0f1; }
 
+.lumber { opacity: 0.8; }
+
 .lumber rect { fill: #1abc9c; }
 
-.lumber text { fill: #fff; font: 10px sans-serif; text-anchor: middle; }
+.lumber text { fill: #bdc3c7; font: 10px sans-serif; text-anchor: middle; }
+
+.lumber .axis text { font: 10px sans-serif; }
+
+.lumber .axis path, .lumber .axis line { fill: none; stroke: #bdc3c7; shape-rendering: crispEdges; }
 
 /* Custom styling by John Otander
 */
@@ -461,7 +467,7 @@ html, body { height: 100%; }
 
 .va-middle { vertical-align: middle; }
 
-header { min-height: 100%; -webkit-background-size: cover; background-size: cover; }
+header { min-height: 100%; background: url(../img/lumber.jpg) no-repeat center; -webkit-background-size: cover; background-size: cover; }
 
 .browser-box { padding-bottom: 0; }
 

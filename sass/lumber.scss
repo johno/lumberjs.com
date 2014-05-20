@@ -41,12 +41,27 @@ $lumber-gray-4: $flat-gray-4;
   color: $lumber-gray-1;
 }
 
+.lumber {
+  opacity: 0.8;
+}
+
 .lumber rect {
   fill: $lumber-green-1;
 }
 
 .lumber text {
-  fill: #fff;
+  fill: $lumber-gray-2;
   font: 10px sans-serif;
   text-anchor: middle;
+}
+
+.lumber .axis text {
+  font: 10px sans-serif;
+}
+
+.lumber .axis path,
+.lumber .axis line {
+  fill: none;
+  stroke: $lumber-gray-2;
+  shape-rendering: crispEdges;
 }

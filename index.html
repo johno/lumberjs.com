@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <title>
-      Lumberjs
+      Lumber.js
     </title>
     <meta name="author" content="John Otander">
     <meta name="description" content="">
@@ -12,13 +12,42 @@
     <link rel="stylesheet" href="css/i.css">
   </head>
   <body>
-    <header class="relative table center">
+    <header class="relative table center white text-shadow">
       <div class="heading-wrapper table-cell va-middle center">
-        <h1 class="h1">Lumberjs</h1>
+        <h1 class="h1">Lumber.js</h1>
+        <p class="h3">
+          A wrapper for d3.js. <br>
+          Currently under development.
+        </p>
       </div>
     </header>
 
-    <svg class="lumber" id="lumber" data-values="1,2,3,4,5,6,7,8,9,10"></svg>
+    <div class="p4">
+      <h2 class="h2">Simple, beautiful graphs.</h2>
+      <p class="h3 mb3">
+        Lumber.js is a wrapper for the d3.js library. It comes with numerous graphs out of the box,
+        and only requires you to write a touch of javascript.
+      </p>
+      <pre class="bg-very-light-gray dark-gray mb3 px3 py1">
+        <code>
+&lt;!-- Set the graph information in the data attributes of an svg tag. --&gt;
+&lt;svg id="lumber"
+     data-lumber-type="bar"
+     data-values="3,2,3,4,5,6,7,6,5,4,2,6,5,6"&gt;
+&lt;/svg&gt;
+&lt;script&gt;
+  // When the DOM is loaded, call lumber's graphing function.
+  document.addEventListener("DOMContentLoaded", function() {
+    lumber.graph("#lumber");
+  });
+&lt;/script&gt;
+        </code>
+      </pre>
+      <div class="center">
+        <h2 class="h2 mb3">Lumber.js takes care of the rest.</h2>
+        <svg class="lumber" id="lumber" data-lumber-type="bar" data-values="3,2,3,4,5,6,7,6,5,4,2,6,5,6"></svg>
+      </div>
+    </div>
 
     <script src="js/d3.js"></script>
     <script src="js/lumber/base.js"></script>
