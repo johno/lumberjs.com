@@ -446,9 +446,15 @@ a:hover { color: #107360; }
 
 .lumber div { font: 10px sans-serif; background-color: #1abc9c; text-align: right; padding: 3px; margin: 1px; color: #ecf0f1; }
 
+.lumber { opacity: 0.8; }
+
 .lumber rect { fill: #1abc9c; }
 
 .lumber text { fill: #fff; font: 10px sans-serif; text-anchor: middle; }
+
+.lumber .axis text { font: 10px sans-serif; }
+
+.lumber .axis path, .lumber .axis line { fill: none; stroke: #ecf0f1; shape-rendering: crispEdges; }
 
 /* Custom styling by John Otander
 */
