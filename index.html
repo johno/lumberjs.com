@@ -17,5 +17,15 @@
         <h1 class="h1">Lumberjs</h1>
       </div>
     </header>
+
+    <svg class="lumber" id="lumber" data-values="1,2,3,4,5,6,7,8,9,10"></svg>
+
+    <script src="js/d3.js"></script>
+    <script src="js/lumber/base.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        lumber.graph("#lumber");
+      });
+    </script>
   </body>
 </html>

@@ -1,0 +1,52 @@
+// Greens
+$lumber-green-1: $flat-green-1;
+$lumber-green-2: $flat-green-2;
+$lumber-green-3: $flat-green-3;
+$lumber-green-4: $flat-green-4;
+
+// Blues
+$lumber-blue-1: $flat-blue-1;
+$lumber-blue-2: $flat-blue-2;
+$lumber-blue-3: $flat-blue-3;
+$lumber-blue-4: $flat-blue-4;
+
+// Purples
+$lumber-purple-1: $flat-purple-1;
+$lumber-purple-2: $flat-purple-2;
+
+// Yellows
+$lumber-yellow-1: $flat-yellow-1;
+
+// Oranges
+$lumber-orange-1: $flat-orange-1;
+$lumber-orange-2: $flat-orange-2;
+$lumber-orange-3: $flat-orange-3;
+
+// Reds
+$lumber-red-1: $flat-red-1;
+$lumber-red-2: $flat-red-2;
+
+// Grays
+$lumber-gray-1: $flat-gray-1;
+$lumber-gray-2: $flat-gray-2;
+$lumber-gray-3: $flat-gray-3;
+$lumber-gray-4: $flat-gray-4;
+
+.lumber div {
+  font: 10px sans-serif;
+  background-color: $lumber-green-1;
+  text-align: right;
+  padding: 3px;
+  margin: 1px;
+  color: $lumber-gray-1;
+}
+
+.lumber rect {
+  fill: $lumber-green-1;
+}
+
+.lumber text {
+  fill: #fff;
+  font: 10px sans-serif;
+  text-anchor: middle;
+}
