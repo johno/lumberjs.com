@@ -38,14 +38,14 @@ function lumber_barChart(chartDiv) {
   var xAxis = d3.svg.axis().scale(x).orient("bottom");
   var yAxis = d3.svg.axis().scale(y).orient("left").ticks(10, "%");
 
+  x.domain(lumber.data.map(function(d) { return d; }))
+  y.domain([0, d3.max(lumber.data, function(d) { return d; })])
+
   var chart = chartDiv
       .attr("width", lumber.width)
       .attr("height", lumber.height)
     .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-
-  x.domain(lumber.data.map(function(d) { return d; }))
-  y.domain([0, d3.max(lumber.data, function(d) { return d; })])
 
   chart.append("g")
       .attr("class", "x axis")
