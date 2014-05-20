@@ -36,7 +36,7 @@ function lumber_barChart(chartDiv) {
     .range([height, 0]);
 
   var xAxis = d3.svg.axis().scale(x).orient("bottom");
-  var yAxis = d3.svg.axis().scale(y).orient("left");
+  var yAxis = d3.svg.axis().scale(y).orient("left").ticks(10, "%");
 
   var chart = chartDiv
       .attr("width", lumber.width)
@@ -54,7 +54,13 @@ function lumber_barChart(chartDiv) {
 
   chart.append("g")
       .attr("class", "y axis")
-      .call(yAxis);
+      .call(yAxis)
+    .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("Frequency");
 
   chart.selectAll(".bar")
       .data(lumber.data)

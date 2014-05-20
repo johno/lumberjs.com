@@ -50,7 +50,7 @@ $lumber-gray-4: $flat-gray-4;
 }
 
 .lumber text {
-  fill: #fff;
+  fill: $lumber-gray-2;
   font: 10px sans-serif;
   text-anchor: middle;
 }
@@ -62,6 +62,6 @@ $lumber-gray-4: $flat-gray-4;
 .lumber .axis path,
 .lumber .axis line {
   fill: none;
-  stroke: $lumber-gray-1;
+  stroke: $lumber-gray-2;
   shape-rendering: crispEdges;
 }
