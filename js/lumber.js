@@ -19,8 +19,11 @@ function lumber_graph(chartDiv) {
   lumber.data   = chartDiv.attr("data-values").split(",");
   lumber.width  = chartDiv.attr("data-width") || 500;
   lumber.height = chartDiv.attr("data-height") || 250;
+  lumber.type   = chartDiv.attr("data-type") || "bar";
 
-  lumber.barChart(chartDiv);
+  if (lumber.type == "bar") {
+    lumber.barChart(chartDiv);
+  }
 }
 
 lumber.barChart = lumber_barChart;
