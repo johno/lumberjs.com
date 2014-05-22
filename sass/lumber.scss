@@ -65,3 +65,9 @@ $lumber-gray-4: $flat-gray-4;
   stroke: $lumber-gray-2;
   shape-rendering: crispEdges;
 }
+
+.line {
+  fill: none;
+  stroke: $lumber-green-1;
+  stroke-width: 1.5px;
+}

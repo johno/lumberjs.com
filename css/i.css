@@ -456,6 +456,8 @@ a:hover { color: #107360; }
 
 .lumber .axis path, .lumber .axis line { fill: none; stroke: #bdc3c7; shape-rendering: crispEdges; }
 
+.line { fill: none; stroke: #1abc9c; stroke-width: 1.5px; }
+
 /* Custom styling by John Otander
 */
 /* ========================================================================== Site styles ========================================================================== */
