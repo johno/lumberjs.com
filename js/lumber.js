@@ -31,6 +31,7 @@ lumber.graph = lumber_graph;
 function lumber_graph(chartDiv) {
   chartDiv = d3.select(chartDiv);
 
+  lumberOpts = {}
   lumberOpts.data   = chartDiv.attr("data-lumber-values").split(",");
   lumberOpts.width  = chartDiv.attr("data-lumber-width") || 500;
   lumberOpts.height = chartDiv.attr("data-lumber-height") || 250;
