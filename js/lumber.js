@@ -39,11 +39,11 @@ function lumber_graph(chartDiv) {
   lumberOpts.yAxis  = chartDiv.attr("data-lumber-y-axis-label") || "Y Axis";
   lumberOpts.xAxis  = chartDiv.attr("data-lumber-x-axis-label") || "X Axis";
 
-  if (lumber.type == "bar")              { lumber.barChart(chartDiv, lumberOpts);    }
-  else if (lumber.type == "pie")         { lumber.pieChart(chartDiv, lumberOpts);    }
-  else if (lumber.type == "line")        { lumber.lineChart(chartDiv, lumberOpts);   }
-  else if (lumber.type == "histogram")   { lumber.histogram(chartDiv, lumberOpts);   }
-  else if (lumber.type == "scatterplot") { lumber.scatterplot(chartDiv, lumberOpts); }
+  if (lumberOpts.type == "bar")              { lumber.barChart(chartDiv, lumberOpts);    }
+  else if (lumberOpts.type == "pie")         { lumber.pieChart(chartDiv, lumberOpts);    }
+  else if (lumberOpts.type == "line")        { lumber.lineChart(chartDiv, lumberOpts);   }
+  else if (lumberOpts.type == "histogram")   { lumber.histogram(chartDiv, lumberOpts);   }
+  else if (lumberOpts.type == "scatterplot") { lumber.scatterplot(chartDiv, lumberOpts); }
 }
 
 /*
