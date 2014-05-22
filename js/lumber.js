@@ -2,7 +2,7 @@
   LUMBER.js
 
     Crafted with <3 by John Otander(@4lpine).
-    MIT License
+    MIT Licensed
  */
 
 function hasLumberDependencies() {
