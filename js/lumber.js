@@ -20,10 +20,12 @@ function lumber_graph(chartDiv) {
   lumber.width  = chartDiv.attr("data-width") || 500;
   lumber.height = chartDiv.attr("data-height") || 250;
   lumber.type   = chartDiv.attr("data-type") || "bar";
+  lumber.yAxis  = chartDiv.attr("data-lumber-y-axis-label") || "Y Axis";
+  lumber.xAxis  = chartDiv.attr("data-lumber-x-axis-label") || "X Axis";
 
   if (lumber.type == "bar")              { lumber.barChart(chartDiv);    }
   else if (lumber.type == "pie")         { lumber.pieChart(chartDiv);    }
-  else if (lumber.type == "line")         { lumber.lineChart(chartDiv);  }
+  else if (lumber.type == "line")        { lumber.lineChart(chartDiv);   }
   else if (lumber.type == "histogram")   { lumber.histogram(chartDiv);   }
   else if (lumber.type == "scatterplot") { lumber.scatterplot(chartDiv); }
 }
@@ -31,7 +33,7 @@ function lumber_graph(chartDiv) {
 lumber.barChart = lumber_barChart;
 function lumber_barChart(chartDiv) {
   var margin = {top: 20, right: 30, bottom: 30, left: 40},
-      width = lumber.width - margin.left - margin.right,
+      width  = lumber.width - margin.left - margin.right,
       height = lumber.height - margin.top - margin.bottom;
 
   var x = d3.scale.ordinal()
@@ -55,7 +57,13 @@ function lumber_barChart(chartDiv) {
   chart.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + height + ")")
-      .call(xAxis);
+      .call(xAxis)
+    .append("text")
+      .attr("y", 30)
+      .attr("x", margin.left - 6)
+      .attr("dx", ".71em")
+      .style("text-anchor", "end")
+      .text(lumber.xAxis);
 
   chart.append("g")
       .attr("class", "y axis")
@@ -65,7 +73,7 @@ function lumber_barChart(chartDiv) {
       .attr("y", 6)
       .attr("dy", ".71em")
       .style("text-anchor", "end")
-      .text("Frequency");
+      .text(lumber.yAxis);
 
   chart.selectAll(".bar")
       .data(lumber.data)
