@@ -74,8 +74,8 @@ function lumber_graph(chartDiv) {
 lumber.barChart = lumber_barChart;
 function lumber_barChart(chartDiv, lumberOpts) {
   var margin = {top: 20, right: 30, bottom: 30, left: 40},
-      width  = lumber.width - margin.left - margin.right,
-      height = lumber.height - margin.top - margin.bottom;
+      width  = lumberOpts.width - margin.left - margin.right,
+      height = lumberOpts.height - margin.top - margin.bottom;
 
   var x = d3.scale.ordinal()
     .rangeRoundBands([0, width], .1);
@@ -86,12 +86,12 @@ function lumber_barChart(chartDiv, lumberOpts) {
   var xAxis = d3.svg.axis().scale(x).orient("bottom");
   var yAxis = d3.svg.axis().scale(y).orient("left").ticks(2, "%");
 
-  x.domain(lumber.data.map(function(d) { return d; }))
-  y.domain([0, d3.max(lumber.data, function(d) { return d; })])
+  x.domain(lumberOpts.data.map(function(d) { return d; }))
+  y.domain([0, d3.max(lumberOpts.data, function(d) { return d; })])
 
   var chart = chartDiv
-      .attr("width", lumber.width)
-      .attr("height", lumber.height)
+      .attr("width", lumberOpts.width)
+      .attr("height", lumberOpts.height)
     .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 
@@ -104,7 +104,7 @@ function lumber_barChart(chartDiv, lumberOpts) {
       .attr("x", margin.left - 6)
       .attr("dx", ".71em")
       .style("text-anchor", "end")
-      .text(lumber.xAxis);
+      .text(lumberOpts.xAxis);
 
   chart.append("g")
       .attr("class", "y axis")
@@ -114,10 +114,10 @@ function lumber_barChart(chartDiv, lumberOpts) {
       .attr("y", 6)
       .attr("dy", ".71em")
       .style("text-anchor", "end")
-      .text(lumber.yAxis);
+      .text(lumberOpts.yAxis);
 
   chart.selectAll(".bar")
-      .data(lumber.data)
+      .data(lumberOpts.data)
     .enter().append("rect")
       .attr("class", "bar")
       .attr("x", function(d) { return x(d); })
