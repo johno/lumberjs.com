@@ -27,6 +27,16 @@ function lumber_getGraphs() {
   return document.querySelectorAll(".lumber");
 }
 
+/*
+  parseChartData
+
+    Params:
+      dataAsString = The data is expected to be a data attribute with the form:
+                     'x1:y1,x2:y2,...,xn:yn'
+
+    Returns:
+      [{x1:y1},...{xn,yn}]
+ */
 lumber.parseChartData = lumber_parseChartData;
 function lumber_parseChartData(dataAsString) {
   dataPoints = dataAsString.split(",");
@@ -38,6 +48,12 @@ function lumber_parseChartData(dataAsString) {
   });
 }
 
+/*
+  graph
+
+    Params:
+      chartDiv = 
+ */
 lumber.graph = lumber_graph;
 function lumber_graph(chartDiv) {
   chartDiv = d3.select(chartDiv);
@@ -73,8 +89,7 @@ function lumber_graph(chartDiv) {
     Requirements (as keys in lumberOpts):
       type   = Specified by the lumber-type data attribute
 
-      data   = The data is expected to be a data attribute with the form:
-               'x1:y1,x2:y2,...,xn:yn'
+      data   = The data is expected to be pre-parsed by parseChartData.
 
       yAxis  = Utilizes the lumber-y-axis-label data attribute
       xAxis  = Utilizes the lumber-x-axis-label data attribute
