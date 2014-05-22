@@ -43,7 +43,9 @@
 &lt;!-- Set the graph information in the data attributes of an svg tag. --&gt;
 &lt;svg id="lumber"
      data-lumber-type="bar"
-     data-values="3,2,3,4,5,6,7,6,5,4,2,6,5,6"&gt;
+     data-lumber-y-axis-label="Frequency"
+     data-lumber-x-axis-label="Letter"
+     data-lumber-values="3:A,2:B,3:C,4:D,5:E,7:F,6:G,5:H,4:I,2:J,6:K,5:L,6:M"&gt;
 &lt;/svg&gt;
 &lt;script&gt;
   // When the DOM is loaded, call lumber's graphing function.
@@ -55,7 +57,7 @@
       </pre>
       <div class="center">
         <h2 class="h2 mb3">Lumber.js takes care of the rest.</h2>
-        <svg class="lumber" id="lumber" data-lumber-type="bar" data-lumber-values="3,2,3,4,5,6,7,6,5,4,2,6,5,6"></svg>
+        <svg class="lumber" id="lumber" data-lumber-type="bar" data-lumber-y-axis-label="Frequency" data-lumber-x-axis-label="Letter" data-lumber-values="3:A,2:B,3:C,4:D,5:E,7:F,6:G,5:H,4:I,2:J,6:K,5:L,6:M"></svg>
       </div>
     </div>
 

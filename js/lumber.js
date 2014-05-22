@@ -27,17 +27,30 @@ function lumber_getGraphs() {
   return document.querySelectorAll(".lumber");
 }
 
+lumber.parseChartData = lumber_parseChartData;
+function lumber_parseChartData(dataAsString) {
+  dataPoints = dataAsString.split(",");
+  return dataPoints.map(function(dataPoint) {
+    data = {};
+    data.name  = dataPoint.split(':')[1];
+    data.value = dataPoint.split(':')[0]
+    return data;
+  });
+}
+
 lumber.graph = lumber_graph;
 function lumber_graph(chartDiv) {
   chartDiv = d3.select(chartDiv);
 
   lumberOpts = {}
-  lumberOpts.data   = chartDiv.attr("data-lumber-values").split(",");
+  lumberOpts.data   = lumber.parseChartData(chartDiv.attr("data-lumber-values"));
   lumberOpts.width  = chartDiv.attr("data-lumber-width") || 500;
   lumberOpts.height = chartDiv.attr("data-lumber-height") || 250;
   lumberOpts.type   = chartDiv.attr("data-lumber-type") || "bar";
   lumberOpts.yAxis  = chartDiv.attr("data-lumber-y-axis-label") || "Y Axis";
   lumberOpts.xAxis  = chartDiv.attr("data-lumber-x-axis-label") || "X Axis";
+
+  console.log(lumberOpts.data);
 
   if (lumberOpts.type == "bar")              { lumber.barChart(chartDiv, lumberOpts);    }
   else if (lumberOpts.type == "pie")         { lumber.pieChart(chartDiv, lumberOpts);    }
@@ -85,10 +98,10 @@ function lumber_barChart(chartDiv, lumberOpts) {
     .range([height, 0]);
 
   var xAxis = d3.svg.axis().scale(x).orient("bottom");
-  var yAxis = d3.svg.axis().scale(y).orient("left").ticks(2, "%");
+  var yAxis = d3.svg.axis().scale(y).orient("left").ticks(3, "");
 
-  x.domain(lumberOpts.data.map(function(d) { return d; }))
-  y.domain([0, d3.max(lumberOpts.data, function(d) { return d; })])
+  x.domain(lumberOpts.data.map(function(d) { return d.name; }))
+  y.domain([0, d3.max(lumberOpts.data, function(d) { return d.value; })])
 
   var chart = chartDiv
       .attr("width", lumberOpts.width)
@@ -121,9 +134,9 @@ function lumber_barChart(chartDiv, lumberOpts) {
       .data(lumberOpts.data)
     .enter().append("rect")
       .attr("class", "bar")
-      .attr("x", function(d) { return x(d); })
-      .attr("y", function(d) { return y(d); })
-      .attr("height", function(d) { return height - y(d); })
+      .attr("x", function(d) { return x(d.name); })
+      .attr("y", function(d) { return y(d.value); })
+      .attr("height", function(d) { return height - y(d.value); })
       .attr("width", x.rangeBand());
 }
 
