@@ -14,6 +14,14 @@ function hasLumberDependencies() {
 
 var lumber = {}
 
+/*
+  getGraphs
+
+    Select all the DOM elements with the class '.lumber'.
+
+    Returns:
+      Array of all DOM elements with the class '.lumber'.
+ */
 lumber.getGraphs = lumber_getGraphs;
 function lumber_getGraphs() {
   return document.querySelectorAll(".lumber");
@@ -23,44 +31,48 @@ lumber.graph = lumber_graph;
 function lumber_graph(chartDiv) {
   chartDiv = d3.select(chartDiv);
 
-  lumber.data   = chartDiv.attr("data-lumber-values").split(",");
-  lumber.width  = chartDiv.attr("data-lumber-width") || 500;
-  lumber.height = chartDiv.attr("data-lumber-height") || 250;
-  lumber.type   = chartDiv.attr("data-lumber-type") || "bar";
-  lumber.yAxis  = chartDiv.attr("data-lumber-y-axis-label") || "Y Axis";
-  lumber.xAxis  = chartDiv.attr("data-lumber-x-axis-label") || "X Axis";
+  lumberOpts.data   = chartDiv.attr("data-lumber-values").split(",");
+  lumberOpts.width  = chartDiv.attr("data-lumber-width") || 500;
+  lumberOpts.height = chartDiv.attr("data-lumber-height") || 250;
+  lumberOpts.type   = chartDiv.attr("data-lumber-type") || "bar";
+  lumberOpts.yAxis  = chartDiv.attr("data-lumber-y-axis-label") || "Y Axis";
+  lumberOpts.xAxis  = chartDiv.attr("data-lumber-x-axis-label") || "X Axis";
 
-  if (lumber.type == "bar")              { lumber.barChart(chartDiv);    }
-  else if (lumber.type == "pie")         { lumber.pieChart(chartDiv);    }
-  else if (lumber.type == "line")        { lumber.lineChart(chartDiv);   }
-  else if (lumber.type == "histogram")   { lumber.histogram(chartDiv);   }
-  else if (lumber.type == "scatterplot") { lumber.scatterplot(chartDiv); }
+  if (lumber.type == "bar")              { lumber.barChart(chartDiv, lumberOpts);    }
+  else if (lumber.type == "pie")         { lumber.pieChart(chartDiv, lumberOpts);    }
+  else if (lumber.type == "line")        { lumber.lineChart(chartDiv, lumberOpts);   }
+  else if (lumber.type == "histogram")   { lumber.histogram(chartDiv, lumberOpts);   }
+  else if (lumber.type == "scatterplot") { lumber.scatterplot(chartDiv, lumberOpts); }
 }
 
 /*
-  Bar Chart
+  barChart
 
     Create a lovely bar chart that is so beautiful no one will even care what
     the data even means.
 
+    This will use the lumberOpts parameter to create a bar chart within the
+    chartDiv. The chartDiv is assumed to be an svg DOM element.
+
     Params:
-      chartDiv = string for selection, for example "#chart" or ".lumber-chart"
+      chartDiv   = string for selection, for example "#chart" or ".lumber-chart"
+      lumberOpts = options hash of information for creating the chart.
 
-    Requirements:
-      type     = Specified by the lumber-type data attribute
+    Requirements (as keys in lumberOpts):
+      type   = Specified by the lumber-type data attribute
 
-      data     = The data is expected to be a data attribute with the form:
-                 'x1:y1,x2:y2,...,xn:yn'
+      data   = The data is expected to be a data attribute with the form:
+               'x1:y1,x2:y2,...,xn:yn'
 
-      yAxis    = Utilizes the lumber-y-axis-label data attribute
-      xAxis    = Utilizes the lumber-x-axis-label data attribute
+      yAxis  = Utilizes the lumber-y-axis-label data attribute
+      xAxis  = Utilizes the lumber-x-axis-label data attribute
 
-      width    = Specified by the lumber-width data attribute
-      height   = Specified by the lumber-height data attribute
+      width  = Specified by the lumber-width data attribute
+      height = Specified by the lumber-height data attribute
 
  */
 lumber.barChart = lumber_barChart;
-function lumber_barChart(chartDiv) {
+function lumber_barChart(chartDiv, lumberOpts) {
   var margin = {top: 20, right: 30, bottom: 30, left: 40},
       width  = lumber.width - margin.left - margin.right,
       height = lumber.height - margin.top - margin.bottom;
@@ -115,22 +127,22 @@ function lumber_barChart(chartDiv) {
 }
 
 lumber.pieChart = lumber_pieChart;
-function lumber_pieChart(chartDiv) {
+function lumber_pieChart(chartDiv, lumberOpts) {
   // ...
 }
 
 lumber.lineChart = lumber_lineChart;
-function lumber_lineChart(chartDiv) {
+function lumber_lineChart(chartDiv, lumberOpts) {
   // ...
 }
 
 lumber.histogram = lumber_histogram;
-function lumber_histogram(chartDiv) {
+function lumber_histogram(chartDiv, lumberOpts) {
   // ...
 }
 
 lumber.scatterplot = lumber_scatterplot;
-function lumber_scatterplot(chartDiv) {
+function lumber_scatterplot(chartDiv, lumberOpts) {
   // ...
 }
 
