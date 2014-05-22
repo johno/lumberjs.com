@@ -50,7 +50,7 @@ function lumber_graph(chartDiv) {
   lumberOpts.yAxis  = chartDiv.attr("data-lumber-y-axis-label") || "Y Axis";
   lumberOpts.xAxis  = chartDiv.attr("data-lumber-x-axis-label") || "X Axis";
 
-  console.log(lumberOpts.data);
+  console.log(lumberOpts);
 
   if (lumberOpts.type == "bar")              { lumber.barChart(chartDiv, lumberOpts);    }
   else if (lumberOpts.type == "pie")         { lumber.pieChart(chartDiv, lumberOpts);    }
