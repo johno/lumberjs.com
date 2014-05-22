@@ -1,3 +1,10 @@
+/*
+  LUMBER.js
+
+  Crafted with <3 by John Otander(@4lpine).
+  MIT License
+ */
+
 function hasLumberDependencies() {
   return "d3" in window &&
          "addEventListener" in window &&
@@ -16,10 +23,10 @@ lumber.graph = lumber_graph;
 function lumber_graph(chartDiv) {
   chartDiv = d3.select(chartDiv);
 
-  lumber.data   = chartDiv.attr("data-values").split(",");
-  lumber.width  = chartDiv.attr("data-width") || 500;
-  lumber.height = chartDiv.attr("data-height") || 250;
-  lumber.type   = chartDiv.attr("data-type") || "bar";
+  lumber.data   = chartDiv.attr("data-lumber-values").split(",");
+  lumber.width  = chartDiv.attr("data-lumber-width") || 500;
+  lumber.height = chartDiv.attr("data-lumber-height") || 250;
+  lumber.type   = chartDiv.attr("data-lumber-type") || "bar";
   lumber.yAxis  = chartDiv.attr("data-lumber-y-axis-label") || "Y Axis";
   lumber.xAxis  = chartDiv.attr("data-lumber-x-axis-label") || "X Axis";
 
@@ -30,6 +37,28 @@ function lumber_graph(chartDiv) {
   else if (lumber.type == "scatterplot") { lumber.scatterplot(chartDiv); }
 }
 
+/*
+  Bar Chart
+
+    Create a lovely bar chart that is so beautiful no one will even care what
+    the data even means.
+
+    Params:
+      chartDiv = string for selection, for example "#chart" or ".lumber-chart"
+
+    Requirements:
+      type     = Specified by the lumber-type data attribute
+
+      data     = The data is expected to be a data attribute with the form:
+                 'x1:y1,x2:y2,...,xn:yn'
+
+      yAxis    = Utilizes the lumber-y-axis-label data attribute
+      xAxis    = Utilizes the lumber-x-axis-label data attribute
+
+      width    = Specified by the lumber-width data attribute
+      height   = Specified by the lumber-height data attribute
+
+ */
 lumber.barChart = lumber_barChart;
 function lumber_barChart(chartDiv) {
   var margin = {top: 20, right: 30, bottom: 30, left: 40},
