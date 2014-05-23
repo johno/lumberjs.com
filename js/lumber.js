@@ -5,6 +5,16 @@
     MIT Licensed
  */
 
+/*
+  hasLumberDependencies
+
+    Check to ensure that d3 is present, additionally check to see if a few
+    other javascript dependencies are also there because Lumber.js relies
+    upon them.
+
+    Returns:
+      true or false
+ */
 function hasLumberDependencies() {
   return "d3" in window &&
          "addEventListener" in window &&
@@ -51,8 +61,13 @@ function lumber_parseChartData(dataAsString) {
 /*
   graph
 
+    TODO: Also allow an options hash to be passed in.
+
+    Utilize the d3.select method to grab the chart selection that's passed in. All of the
+    lumber options are taken from the chartDiv's data attributes.
+
     Params:
-      chartDiv = 
+      chartDiv = A dom selection based on a class or id: '#lumber' or '.my-lumber-chart'.
  */
 lumber.graph = lumber_graph;
 function lumber_graph(chartDiv) {
@@ -97,6 +112,7 @@ function lumber_graph(chartDiv) {
       width  = Specified by the lumber-width data attribute
       height = Specified by the lumber-height data attribute
 
+  http://bl.ocks.org/mbostock/3885304
  */
 lumber.barChart = lumber_barChart;
 function lumber_barChart(chartDiv, lumberOpts) {
@@ -158,7 +174,13 @@ function lumber_pieChart(chartDiv, lumberOpts) {
   // ...
 }
 
-// http://bl.ocks.org/mbostock/3883245
+/*
+  lineChart
+
+
+
+  http://bl.ocks.org/mbostock/3883245
+ */
 lumber.lineChart = lumber_lineChart;
 function lumber_lineChart(chartDiv, lumberOpts) {
   var margin = {top: 20, right: 30, bottom: 30, left: 40},
