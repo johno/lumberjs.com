@@ -1,36 +1,42 @@
+// === Variables
+
 // Greens
-$lumber-green-1: $flat-green-1;
-$lumber-green-2: $flat-green-2;
-$lumber-green-3: $flat-green-3;
-$lumber-green-4: $flat-green-4;
+$lumber-green-1: #1ABC9C;
+$lumber-green-2: #16A085;
+$lumber-green-3: #2ECC71;
+$lumber-green-4: #27AE60;
 
 // Blues
-$lumber-blue-1: $flat-blue-1;
-$lumber-blue-2: $flat-blue-2;
-$lumber-blue-3: $flat-blue-3;
-$lumber-blue-4: $flat-blue-4;
+$lumber-blue-1: #3498DB;
+$lumber-blue-2: #2980B9;
+$lumber-blue-3: #34495E;
+$lumber-blue-4: #2C3E50;
 
 // Purples
-$lumber-purple-1: $flat-purple-1;
-$lumber-purple-2: $flat-purple-2;
+$lumber-purple-1: #9B59B6;
+$lumber-purple-2: #8E44AD;
 
 // Yellows
-$lumber-yellow-1: $flat-yellow-1;
+$lumber-yellow-1: #F1C40F;
 
 // Oranges
-$lumber-orange-1: $flat-orange-1;
-$lumber-orange-2: $flat-orange-2;
-$lumber-orange-3: $flat-orange-3;
+$lumber-orange-1: #F39C12;
+$lumber-orange-2: #E67E22;
+$lumber-orange-3: #D35400;
 
 // Reds
-$lumber-red-1: $flat-red-1;
-$lumber-red-2: $flat-red-2;
+$lumber-red-1: #E74C3C;
+$lumber-red-2: #C0392B;
 
 // Grays
-$lumber-gray-1: $flat-gray-1;
-$lumber-gray-2: $flat-gray-2;
-$lumber-gray-3: $flat-gray-3;
-$lumber-gray-4: $flat-gray-4;
+$lumber-gray-1: #ECF0F1;
+$lumber-gray-2: #BDC3C7;
+$lumber-gray-3: #95A5A6;
+$lumber-gray-4: #7F8C8D;
+
+// === End variables
+
+// === Styling
 
 .lumber div {
   font: 10px sans-serif;
@@ -66,8 +72,10 @@ $lumber-gray-4: $flat-gray-4;
   shape-rendering: crispEdges;
 }
 
-.line {
+.lumber .line {
   fill: none;
   stroke: $lumber-green-1;
   stroke-width: 1.5px;
 }
+
+// === End styling
