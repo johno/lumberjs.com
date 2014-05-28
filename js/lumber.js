@@ -38,6 +38,17 @@ function lumber_getGraphs() {
 }
 
 /*
+  resizeResponsiveGraphs
+
+    Select all the lumber graphs that are responsive and resize them base on their
+    aspect ratio and the current window size.
+ */
+lumber.resizeResponsiveGraphs = lumber_resizeResponsiveGraphs;
+function lumber_resizeResponsiveGraphs() {
+  // ...
+}
+
+/*
   parseChartData
 
     Params:
@@ -75,11 +86,13 @@ function lumber_graph(chartDiv) {
 
   lumberOpts = {}
   lumberOpts.data   = lumber.parseChartData(chartDiv.attr("data-lumber-values"));
-  lumberOpts.width  = chartDiv.attr("data-lumber-width") || 500;
+  lumberOpts.width  = chartDiv.attr("data-lumber-width") || 400;
   lumberOpts.height = chartDiv.attr("data-lumber-height") || 250;
   lumberOpts.type   = chartDiv.attr("data-lumber-type") || "bar";
   lumberOpts.yAxis  = chartDiv.attr("data-lumber-y-axis-label") || "";
   lumberOpts.xAxis  = chartDiv.attr("data-lumber-x-axis-label") || "";
+
+  lumberOpts.responsive = chartDiv.attr("data-lumber-responsive");
 
   if (lumberOpts.type == "bar")              { lumber.barChart(chartDiv, lumberOpts);    }
   else if (lumberOpts.type == "pie")         { lumber.pieChart(chartDiv, lumberOpts);    }
@@ -252,3 +265,10 @@ function lumber_scatterplot(chartDiv, lumberOpts) {
 if (!hasLumberDependencies()) {
   console.log("Missing dependencies for lumber.js.");
 }
+
+window.addEventListener("resize", function(event) {
+  if (window.resizing) clearTimeout(window.resizing);
+  window.resizing = setTimeout(function() {
+    lumber.resizeResponsiveGraphs();
+  }, 300)
+});
