@@ -274,5 +274,5 @@ window.addEventListener("resize", function(event) {
   if (window.resizing) clearTimeout(window.resizing);
   window.resizing = setTimeout(function() {
     lumber.resizeResponsiveGraphs();
-  }, 300)
+  }, 300);
 });
