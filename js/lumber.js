@@ -19,10 +19,10 @@ function hasLumberDependencies() {
   return "d3" in window &&
          "addEventListener" in window &&
          "querySelector" in document &&
-         Array.prototype.forEach
+         Array.prototype.forEach;
 }
 
-var lumber = {}
+var lumber = {};
 
 /*
   getGraphs
@@ -56,7 +56,7 @@ function lumber_resizeResponsiveGraphs() {
                      'x1:y1,x2:y2,...,xn:yn'
 
     Returns:
-      [{x1:y1},...{xn,yn}]
+      [{x1: x1_value, y1:y1_value},...{xn:xn_value,yn:yn_value}]
  */
 lumber.parseChartData = lumber_parseChartData;
 function lumber_parseChartData(dataAsString) {
@@ -64,7 +64,7 @@ function lumber_parseChartData(dataAsString) {
   return dataPoints.map(function(dataPoint) {
     data = {};
     data.y  = dataPoint.split(':')[1];
-    data.x = dataPoint.split(':')[0]
+    data.x  = dataPoint.split(':')[0];
     return data;
   });
 }
@@ -84,21 +84,20 @@ lumber.graph = lumber_graph;
 function lumber_graph(chartDiv) {
   chartDiv = d3.select(chartDiv);
 
-  lumberOpts = {}
+  lumberOpts = {};
   lumberOpts.data   = lumber.parseChartData(chartDiv.attr("data-lumber-values"));
-  lumberOpts.width  = chartDiv.attr("data-lumber-width") || 400;
+  lumberOpts.width  = chartDiv.attr("data-lumber-width") || 500;
   lumberOpts.height = chartDiv.attr("data-lumber-height") || 250;
   lumberOpts.type   = chartDiv.attr("data-lumber-type") || "bar";
   lumberOpts.yAxis  = chartDiv.attr("data-lumber-y-axis-label") || "";
   lumberOpts.xAxis  = chartDiv.attr("data-lumber-x-axis-label") || "";
-
-  lumberOpts.responsive = chartDiv.attr("data-lumber-responsive");
 
   if (lumberOpts.type == "bar")              { lumber.barChart(chartDiv, lumberOpts);    }
   else if (lumberOpts.type == "pie")         { lumber.pieChart(chartDiv, lumberOpts);    }
   else if (lumberOpts.type == "line")        { lumber.lineChart(chartDiv, lumberOpts);   }
   else if (lumberOpts.type == "histogram")   { lumber.histogram(chartDiv, lumberOpts);   }
   else if (lumberOpts.type == "scatterplot") { lumber.scatterplot(chartDiv, lumberOpts); }
+  else if (lumberOpts.type == "stackedbar")  { lumber.stackedBar(chartDiv, lumberOpts);  }
 }
 
 /*
@@ -134,7 +133,7 @@ function lumber_barChart(chartDiv, lumberOpts) {
       height = lumberOpts.height - margin.top - margin.bottom;
 
   var x = d3.scale.ordinal()
-    .rangeRoundBands([0, width], .1);
+    .rangeRoundBands([0, width], 0.1);
 
   var y = d3.scale.linear()
     .range([height, 0]);
@@ -142,8 +141,8 @@ function lumber_barChart(chartDiv, lumberOpts) {
   var xAxis = d3.svg.axis().scale(x).orient("bottom");
   var yAxis = d3.svg.axis().scale(y).orient("left").ticks(3, "");
 
-  x.domain(lumberOpts.data.map(function(d) { return d.y; }))
-  y.domain([0, d3.max(lumberOpts.data, function(d) { return d.x; })])
+  x.domain(lumberOpts.data.map(function(d) { return d.y; }));
+  y.domain([0, d3.max(lumberOpts.data, function(d) { return d.x; })]);
 
   var chart = chartDiv
       .attr("width", lumberOpts.width)
@@ -259,6 +258,11 @@ function lumber_histogram(chartDiv, lumberOpts) {
 
 lumber.scatterplot = lumber_scatterplot;
 function lumber_scatterplot(chartDiv, lumberOpts) {
+  // ...
+}
+
+lumber.stackedBar = lumber_stackedBar;
+function lumber_stackedBar(chartDiv, lumberOpts) {
   // ...
 }
 
