@@ -189,7 +189,7 @@ function lumber_barChart(chartDiv, lumberOpts) {
 lumber.pieChart = lumber_pieChart;
 function lumber_pieChart(chartDiv, lumberOpts) {
   var width = 960,
-      height = 500,
+      height = 300,
       radius = Math.min(width, height) / 2;
 
   var color = d3.scale.ordinal()
@@ -203,7 +203,7 @@ function lumber_pieChart(chartDiv, lumberOpts) {
       .sort(null)
       .value(function(d) { return d.x; });
 
-  var svg = chartDiv.append("svg")
+  var svg = chartDiv
       .attr("width", width)
       .attr("height", height)
     .append("g")

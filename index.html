@@ -81,6 +81,28 @@
 
         <svg id="line" class="lumber" data-lumber-type="line" data-lumber-x-axis-label="Price ($)" data-lumber-values="1-May-12:582.13,30-Apr-12:583.98,22-Apr-12:555.555,20-Apr-12:500.11"></svg>
       </div>
+
+      <div class="p4 p-responsive">
+        <h3 class="h2">Create a pie chart.</h3>
+        <pre class="bg-very-light-gray dark-gray mb3 px3 py1">
+          <code>
+&lt;!-- Set the graph information in the data attributes of an svg tag. --&gt;
+&lt;svg id="pie"
+     data-lumber-type="pie"
+     data-lumber-values="3:A,2:B,3:C,4:D,5:E,7:F,6:G,5:H,4:I,2:J,6:K,5:L,6:M"&gt;
+&lt;/svg&gt;
+&lt;script&gt;
+  // When the DOM is loaded, call lumber's graphing function.
+  document.addEventListener("DOMContentLoaded", function() {
+    lumber.graph("#pie");
+  });
+&lt;/script&gt;
+          </code>
+        </pre>
+
+        <svg id="pie" class="lumber" data-lumber-type="pie" data-lumber-x-axis-label="Price ($)" data-lumber-values="3:A,2:B,3:C,4:D,5:E,7:F,6:G,5:H,4:I,2:J,6:K,5:L,6:M"></svg>
+        <div class="clearfix"></div>
+      </div>
     </div>
 
     <div class="p4 p-responsive bg-very-light-gray">
@@ -93,6 +115,7 @@
       document.addEventListener("DOMContentLoaded", function() {
         lumber.graph("#lumber");
         lumber.graph("#line");
+        lumber.graph("#pie");
       });
     </script>
   </body>
