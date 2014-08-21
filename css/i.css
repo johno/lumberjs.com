@@ -63,7 +63,7 @@ svg:not(:root) { overflow: hidden; }
 figure { margin: 1em 40px; }
 
 /** Address differences between Firefox and other browsers. */
-hr { -moz-box-sizing: content-box; -webkit-box-sizing: content-box; box-sizing: content-box; height: 0; }
+hr { -moz-box-sizing: content-box; box-sizing: content-box; height: 0; }
 
 /** Contain overflow in all browsers. */
 pre { overflow: auto; }
@@ -95,13 +95,13 @@ button::-moz-focus-inner, input::-moz-focus-inner { border: 0; padding: 0; }
 input { line-height: normal; }
 
 /** It's recommended that you don't attempt to style these elements. Firefox's implementation doesn't respect box-sizing, padding, or width.  1. Address box sizing set to `content-box` in IE 8/9/10. 2. Remove excess padding in IE 8/9/10. */
-input[type="checkbox"], input[type="radio"] { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; /* 1 */ padding: 0; /* 2 */ }
+input[type="checkbox"], input[type="radio"] { -moz-box-sizing: border-box; box-sizing: border-box; /* 1 */ padding: 0; /* 2 */ }
 
 /** Fix the cursor style for Chrome's increment/decrement buttons. For certain `font-size` values of the `input`, it causes the cursor style of the decrement button to change from `default` to `text`. */
 input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button { height: auto; }
 
 /** 1. Address `appearance` set to `searchfield` in Safari 5 and Chrome. 2. Address `box-sizing` set to `border-box` in Safari 5 and Chrome (include `-moz` to future-proof). */
-input[type="search"] { -webkit-appearance: textfield; /* 1 */ -moz-box-sizing: content-box; -webkit-box-sizing: content-box; /* 2 */ box-sizing: content-box; }
+input[type="search"] { -webkit-appearance: textfield; /* 1 */ -moz-box-sizing: content-box; /* 2 */ box-sizing: content-box; }
 
 /** Remove inner padding and search cancel button in Safari and Chrome on OS X. Safari (but not Chrome) clips the cancel button when the search input has padding (and `textfield` appearance). */
 input[type="search"]::-webkit-search-cancel-button, input[type="search"]::-webkit-search-decoration { -webkit-appearance: none; }
@@ -340,11 +340,11 @@ strong, .bold { font-weight: bold; }
 
 .form { font-size: 1rem; }
 
-.input { appearance: none; border-style: solid; border-width: 1px; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; max-width: 100%; height: 3rem; line-height: 2rem; padding: .5rem; border-radius: .25rem; }
+.input { appearance: none; border-style: solid; border-width: 1px; -moz-box-sizing: border-box; box-sizing: border-box; max-width: 100%; height: 3rem; line-height: 2rem; padding: .5rem; border-radius: .25rem; }
 
-.select { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; height: 3rem; margin-right: 0; margin-left: 0; border-radius: .25rem; }
+.select { -moz-box-sizing: border-box; box-sizing: border-box; height: 3rem; margin-right: 0; margin-left: 0; border-radius: .25rem; }
 
-.textarea { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; padding: 1rem; line-height: 1.5rem; border-radius: .25rem; }
+.textarea { -moz-box-sizing: border-box; box-sizing: border-box; padding: 1rem; line-height: 1.5rem; border-radius: .25rem; }
 
 .form-stacked label, .form-stacked .input, .form-stacked .select { display: block; width: 100%; }
 .form-stacked .input, .form-stacked .select, .form-stacked .radio, .form-stacked .checkbox { margin-bottom: 1rem; }
@@ -419,8 +419,8 @@ body { color: #95a5a6; background-color: #fff; }
 a { color: #16a085; text-decoration: none; }
 a:hover { color: #107360; }
 
-.button { border-radius: .25rem; -webkit-transition-duration: .2s; transition-duration: .2s; -webkit-transition-timing-function: ease; transition-timing-function: ease; -webkit-transition-property: -webkit-box-shadow , background-color; transition-property: box-shadow , background-color; }
-.button:focus { outline: none; -webkit-box-shadow: 0 0 0 2px white, 0 0 1px 4px rgba(44, 62, 80, 0.5); box-shadow: 0 0 0 2px white, 0 0 1px 4px rgba(44, 62, 80, 0.5); }
+.button { border-radius: .25rem; -webkit-transition-duration: .2s; transition-duration: .2s; -webkit-transition-timing-function: ease; transition-timing-function: ease; -webkit-transition-property: box-shadow , background-color; transition-property: box-shadow , background-color; }
+.button:focus { outline: none; box-shadow: 0 0 0 2px white, 0 0 1px 4px rgba(44, 62, 80, 0.5); }
 
 .button-green { color: #fff; background-color: #16a085; }
 .button-green:hover { color: #fff; background-color: #0a463a; }
@@ -428,10 +428,10 @@ a:hover { color: #107360; }
 .button-gray { color: #fff; background-color: #95a5a6; }
 .button-gray:hover { color: #fff; background-color: #617374; }
 
-.form-light .input, .form-light .textarea, .form-light .select { -webkit-transition: -webkit-box-shadow .2s ease; transition: box-shadow .2s ease; border-color: #95a5a6; }
-.form-light .input:focus, .form-light .textarea:focus, .form-light .select:focus { outline: none; border-color: #2c3e50; -webkit-box-shadow: 0 0 0.125rem rgba(44, 62, 80, 0.5); box-shadow: 0 0 0.125rem rgba(44, 62, 80, 0.5); }
-.form-light .radio input, .form-light .checkbox input { -webkit-transition: -webkit-box-shadow .2s ease; transition: box-shadow .2s ease; }
-.form-light .radio input:focus, .form-light .checkbox input:focus { outline: none; -webkit-box-shadow: 0 0 0 2px white, 0 0 1px 4px rgba(44, 62, 80, 0.5); box-shadow: 0 0 0 2px white, 0 0 1px 4px rgba(44, 62, 80, 0.5); }
+.form-light .input, .form-light .textarea, .form-light .select { -webkit-transition: box-shadow .2s ease; transition: box-shadow .2s ease; border-color: #95a5a6; }
+.form-light .input:focus, .form-light .textarea:focus, .form-light .select:focus { outline: none; border-color: #2c3e50; box-shadow: 0 0 0.125rem rgba(44, 62, 80, 0.5); }
+.form-light .radio input, .form-light .checkbox input { -webkit-transition: box-shadow .2s ease; transition: box-shadow .2s ease; }
+.form-light .radio input:focus, .form-light .checkbox input:focus { outline: none; box-shadow: 0 0 0 2px white, 0 0 1px 4px rgba(44, 62, 80, 0.5); }
 .form-light .radio input { border-radius: 50%; }
 
 .border { border-style: solid; border-width: 1px; }
@@ -469,13 +469,13 @@ html, body { height: 100%; }
 
 .va-middle { vertical-align: middle; }
 
-header { min-height: 100%; background: url(../img/lumber.jpg) no-repeat center; -webkit-background-size: cover; background-size: cover; }
+header { min-height: 100%; background: url(../img/lumber.jpg) no-repeat center; background-size: cover; }
 
 .browser-box { padding-bottom: 0; }
 
 .browser-window { width: 100%; display: inline-block; border-radius: 5px; background-color: #fff; }
 
-.browser-window .top-bar { height: 36px; border-radius: 5px 5px 0 0; border-top: thin solid #eaeae9; border-bottom: thin solid #dfdfde; background: -webkit-gradient(linear, left top, left bottom, from(#e7e7e6), to(#e2e2e1)); background: -webkit-linear-gradient(#e7e7e6, #e2e2e1); background: linear-gradient(#e7e7e6, #e2e2e1); }
+.browser-window .top-bar { height: 36px; border-radius: 5px 5px 0 0; border-top: thin solid #eaeae9; border-bottom: thin solid #dfdfde; background: -webkit-linear-gradient(#e7e7e6, #e2e2e1); background: linear-gradient(#e7e7e6, #e2e2e1); }
 
 .browser-window .circle { height: 8px; width: 8px; display: inline-block; border-radius: 50%; background-color: white; }
 
