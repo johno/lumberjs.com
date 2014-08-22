@@ -22,261 +22,142 @@ function hasLumberDependencies() {
          Array.prototype.forEach;
 }
 
-var lumber = {};
+var lumber = {
 
-/*
-  getGraphs
+  /*
+    getGraphs
 
-    Select all the DOM elements with the class '.lumber'.
+      Select all the DOM elements with the class '.lumber'.
 
-    Returns:
-      Array of all DOM elements with the class '.lumber'.
- */
-lumber.getGraphs = lumber_getGraphs;
-function lumber_getGraphs() {
-  return document.querySelectorAll(".lumber");
-}
+      Returns:
+        Array of all DOM elements with the class '.lumber'.
+   */
+  getGraphs: function() {
+    return document.querySelectorAll(".lumber")
+  },
 
-/*
-  resizeResponsiveGraphs
+  /*
+    resizeResponsiveGraphs
 
-    Select all the lumber graphs that are responsive and resize them base on their
-    aspect ratio and the current window size.
- */
-lumber.resizeResponsiveGraphs = lumber_resizeResponsiveGraphs;
-function lumber_resizeResponsiveGraphs() {
-  // ...
-}
+      Select all the lumber graphs that are responsive and resize them base on their
+      aspect ratio and the current window size.
+   */
+  resizeResponsiveGraphs: function() {
+    // ...
+  },
 
-/*
-  parseChartData
+  /*
+    parseChartData
 
-    Params:
-      dataAsString = The data is expected to be a data attribute with the form:
-                     'x1:y1,x2:y2,...,xn:yn'
+      Params:
+        dataAsString = The data is expected to be a data attribute with the form:
+                       'x1:y1,x2:y2,...,xn:yn'
 
-    Returns:
-      [{x1: x1_value, y1:y1_value},...{xn:xn_value,yn:yn_value}]
- */
-lumber.parseChartData = lumber_parseChartData;
-function lumber_parseChartData(dataAsString) {
-  dataPoints = dataAsString.split(",");
-  return dataPoints.map(function(dataPoint) {
-    data = {};
-    data.y  = dataPoint.split(':')[1];
-    data.x  = dataPoint.split(':')[0];
-    return data;
-  });
-}
+      Returns:
+        [{x1: x1_value, y1:y1_value},...{xn:xn_value,yn:yn_value}]
+   */
+  parseChartData: function(dataAsString) {
+    dataPoints = dataAsString.split(",");
 
-/*
-  graph
+    return dataPoints.map(function(dataPoint) {
+      data = {};
+      data.y  = dataPoint.split(':')[1];
+      data.x  = dataPoint.split(':')[0];
+      return data;
+    })
+  },
 
-    TODO: Also allow an options hash to be passed in.
+  /*
+    graph
 
-    Utilize the d3.select method to grab the chart selection that's passed in. All of the
-    lumber options are taken from the chartDiv's data attributes.
+      TODO: Also allow an options hash to be passed in.
 
-    Params:
-      chartDiv = A dom selection based on a class or id: '#lumber' or '.my-lumber-chart'.
- */
-lumber.graph = lumber_graph;
-function lumber_graph(chartDiv) {
-  chartDiv = d3.select(chartDiv);
+      Utilize the d3.select method to grab the chart selection that's passed in. All of the
+      lumber options are taken from the chartDiv's data attributes.
 
-  lumberOpts = {};
-  lumberOpts.data   = lumber.parseChartData(chartDiv.attr("data-lumber-values"));
-  lumberOpts.width  = chartDiv.attr("data-lumber-width") || 500;
-  lumberOpts.height = chartDiv.attr("data-lumber-height") || 250;
-  lumberOpts.type   = chartDiv.attr("data-lumber-type") || "bar";
-  lumberOpts.yAxis  = chartDiv.attr("data-lumber-y-axis-label") || "";
-  lumberOpts.xAxis  = chartDiv.attr("data-lumber-x-axis-label") || "";
+      Params:
+        chartDiv = A dom selection based on a class or id: '#lumber' or '.my-lumber-chart'.
+   */
+  graph: function(chartDiv) {
+    chartDiv = d3.select(chartDiv);
 
-  if (lumberOpts.type == "bar")              { lumber.barChart(chartDiv, lumberOpts);    }
-  else if (lumberOpts.type == "pie")         { lumber.pieChart(chartDiv, lumberOpts);    }
-  else if (lumberOpts.type == "line")        { lumber.lineChart(chartDiv, lumberOpts);   }
-  else if (lumberOpts.type == "histogram")   { lumber.histogram(chartDiv, lumberOpts);   }
-  else if (lumberOpts.type == "scatterplot") { lumber.scatterplot(chartDiv, lumberOpts); }
-  else if (lumberOpts.type == "stackedbar")  { lumber.stackedBar(chartDiv, lumberOpts);  }
-}
+    lumberOpts = {};
+    lumberOpts.data   = lumber.parseChartData(chartDiv.attr("data-lumber-values"));
+    lumberOpts.width  = chartDiv.attr("data-lumber-width") || 500;
+    lumberOpts.height = chartDiv.attr("data-lumber-height") || 250;
+    lumberOpts.type   = chartDiv.attr("data-lumber-type") || "bar";
+    lumberOpts.yAxis  = chartDiv.attr("data-lumber-y-axis-label") || "";
+    lumberOpts.xAxis  = chartDiv.attr("data-lumber-x-axis-label") || "";
 
-/*
-  barChart
+    if (lumberOpts.type == "bar")              { lumber.barChart(chartDiv, lumberOpts);    }
+    else if (lumberOpts.type == "pie")         { lumber.pieChart(chartDiv, lumberOpts);    }
+    else if (lumberOpts.type == "line")        { lumber.lineChart(chartDiv, lumberOpts);   }
+    else if (lumberOpts.type == "histogram")   { lumber.histogram(chartDiv, lumberOpts);   }
+    else if (lumberOpts.type == "scatterplot") { lumber.scatterplot(chartDiv, lumberOpts); }
+    else if (lumberOpts.type == "stackedbar")  { lumber.stackedBar(chartDiv, lumberOpts);  }
+  },
 
-    Create a lovely bar chart that is so beautiful no one will even care what
-    the data even means.
+  /*
+    barChart
 
-    This will use the lumberOpts parameter to create a bar chart within the
-    chartDiv. The chartDiv is assumed to be an svg DOM element.
+      Create a lovely bar chart that is so beautiful no one will even care what
+      the data even means.
 
-    Params:
-      chartDiv   = string for selection, for example "#chart" or ".lumber-chart"
-      lumberOpts = options hash of information for creating the chart.
+      This will use the lumberOpts parameter to create a bar chart within the
+      chartDiv. The chartDiv is assumed to be an svg DOM element.
 
-    Requirements (as keys in lumberOpts):
-      type   = Specified by the lumber-type data attribute
+      Params:
+        chartDiv   = string for selection, for example "#chart" or ".lumber-chart"
+        lumberOpts = options hash of information for creating the chart.
 
-      data   = The data is expected to be pre-parsed by parseChartData.
+      Requirements (as keys in lumberOpts):
+        type   = Specified by the lumber-type data attribute
 
-      yAxis  = Utilizes the lumber-y-axis-label data attribute
-      xAxis  = Utilizes the lumber-x-axis-label data attribute
+        data   = The data is expected to be pre-parsed by parseChartData.
 
-      width  = Specified by the lumber-width data attribute
-      height = Specified by the lumber-height data attribute
+        yAxis  = Utilizes the lumber-y-axis-label data attribute
+        xAxis  = Utilizes the lumber-x-axis-label data attribute
 
-  http://bl.ocks.org/mbostock/3885304
- */
-lumber.barChart = lumber_barChart;
-function lumber_barChart(chartDiv, lumberOpts) {
-  var margin = {top: 20, right: 30, bottom: 30, left: 40},
-      width  = lumberOpts.width - margin.left - margin.right,
-      height = lumberOpts.height - margin.top - margin.bottom;
+        width  = Specified by the lumber-width data attribute
+        height = Specified by the lumber-height data attribute
 
-  var x = d3.scale.ordinal()
-    .rangeRoundBands([0, width], 0.1);
+    http://bl.ocks.org/mbostock/3885304
+   */
+  barChart: function(chartDiv, lumberOpts) {
+    var margin = {top: 20, right: 30, bottom: 30, left: 40},
+        width  = lumberOpts.width - margin.left - margin.right,
+        height = lumberOpts.height - margin.top - margin.bottom;
 
-  var y = d3.scale.linear()
-    .range([height, 0]);
+    var x = d3.scale.ordinal()
+      .rangeRoundBands([0, width], 0.1);
 
-  var xAxis = d3.svg.axis().scale(x).orient("bottom");
-  var yAxis = d3.svg.axis().scale(y).orient("left").ticks(3, "");
+    var y = d3.scale.linear()
+      .range([height, 0]);
 
-  x.domain(lumberOpts.data.map(function(d) { return d.y; }));
-  y.domain([0, d3.max(lumberOpts.data, function(d) { return d.x; })]);
+    var xAxis = d3.svg.axis().scale(x).orient("bottom");
+    var yAxis = d3.svg.axis().scale(y).orient("left").ticks(3, "");
 
-  var chart = chartDiv
-      .attr("width", lumberOpts.width)
-      .attr("height", lumberOpts.height)
-    .append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    x.domain(lumberOpts.data.map(function(d) { return d.y; }));
+    y.domain([0, d3.max(lumberOpts.data, function(d) { return d.x; })]);
 
-  chart.append("g")
-      .attr("class", "x axis")
-      .attr("transform", "translate(0," + height + ")")
-      .call(xAxis)
-    .append("text")
-      .attr("y", 30)
-      .attr("x", margin.left - 6)
-      .attr("dx", ".71em")
-      .style("text-anchor", "end")
-      .text(lumberOpts.xAxis);
+    var chart = chartDiv
+        .attr("width", lumberOpts.width)
+        .attr("height", lumberOpts.height)
+      .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-  chart.append("g")
-      .attr("class", "y axis")
-      .call(yAxis)
-    .append("text")
-      .attr("transform", "rotate(-90)")
-      .attr("y", 6)
-      .attr("dy", ".71em")
-      .style("text-anchor", "end")
-      .text(lumberOpts.yAxis);
-
-  chart.selectAll(".bar")
-      .data(lumberOpts.data)
-    .enter().append("rect")
-      .attr("class", "bar")
-      .attr("x", function(d) { return x(d.y); })
-      .attr("y", function(d) { return y(d.x); })
-      .attr("height", function(d) { return height - y(d.x); })
-      .attr("width", x.rangeBand());
-}
-
-/*
-  pieChart
-
-  http://bl.ocks.org/mbostock/3887235
- */
-lumber.pieChart = lumber_pieChart;
-function lumber_pieChart(chartDiv, lumberOpts) {
-  var width = 960,
-      height = 300,
-      radius = Math.min(width, height) / 2;
-
-  var color = d3.scale.ordinal()
-    .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
-
-  var arc = d3.svg.arc()
-      .outerRadius(radius - 10)
-      .innerRadius(0);
-
-  var pie = d3.layout.pie()
-      .sort(null)
-      .value(function(d) { return d.x; });
-
-  var svg = chartDiv
-      .attr("width", width)
-      .attr("height", height)
-    .append("g")
-      .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-
-  lumberOpts.data.forEach(function(d) {
-    d.x = +d.x;
-  });
-
-  var g = svg.selectAll(".arc")
-      .data(pie(lumberOpts.data))
-    .enter().append("g")
-      .attr("class", "arc");
-
-  g.append("path")
-      .attr("d", arc)
-      .style("fill", function(d) { return color(d.data.x); });
-
-  g.append("text")
-      .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
-      .attr("dy", ".35em")
-      .style("text-anchor", "middle")
-      .text(function(d) { console.log(d.data.y); return d.data.y; });
-}
-
-/*
-  lineChart
-
-  http://bl.ocks.org/mbostock/3883245
- */
-lumber.lineChart = lumber_lineChart;
-function lumber_lineChart(chartDiv, lumberOpts) {
-  var margin = {top: 20, right: 30, bottom: 30, left: 40},
-      width  = lumberOpts.width - margin.left - margin.right,
-      height = lumberOpts.height - margin.top - margin.bottom;
-
-
-  var parseDate = d3.time.format("%d-%b-%y");
-  lumberOpts.data.forEach(function(dataPoint) {
-    dataPoint.x = parseDate.parse(dataPoint.x);
-    dataPoint.y = +dataPoint.y;
-  });
-
-  var x = d3.time.scale().range([0, width]);
-  var y = d3.scale.linear().range([height, 0]);
-
-  var xAxis = d3.svg.axis()
-      .scale(x)
-      .orient("bottom");
-
-  var yAxis = d3.svg.axis()
-      .scale(y)
-      .orient("left");
-
-  var line = d3.svg.line()
-      .x(function(d) { return x(d.x); })
-      .y(function(d) { return y(d.y); });
-
-  var svg = chartDiv
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-    x.domain(d3.extent(lumberOpts.data, function(d) { return d.x; }));
-    y.domain(d3.extent(lumberOpts.data, function(d) { return d.y; }));
-
-    svg.append("g")
+    chart.append("g")
         .attr("class", "x axis")
         .attr("transform", "translate(0," + height + ")")
-        .call(xAxis);
+        .call(xAxis)
+      .append("text")
+        .attr("y", 30)
+        .attr("x", margin.left - 6)
+        .attr("dx", ".71em")
+        .style("text-anchor", "end")
+        .text(lumberOpts.xAxis);
 
-    svg.append("g")
+    chart.append("g")
         .attr("class", "y axis")
         .call(yAxis)
       .append("text")
@@ -284,28 +165,132 @@ function lumber_lineChart(chartDiv, lumberOpts) {
         .attr("y", 6)
         .attr("dy", ".71em")
         .style("text-anchor", "end")
-        .text("Price ($)");
+        .text(lumberOpts.yAxis);
 
-    svg.append("path")
-        .datum(lumberOpts.data)
-        .attr("class", "line")
-        .attr("d", line);
-}
+    chart.selectAll(".bar")
+        .data(lumberOpts.data)
+      .enter().append("rect")
+        .attr("class", "bar")
+        .attr("x", function(d) { return x(d.y); })
+        .attr("y", function(d) { return y(d.x); })
+        .attr("height", function(d) { return height - y(d.x); })
+        .attr("width", x.rangeBand());
+  },
 
-lumber.histogram = lumber_histogram;
-function lumber_histogram(chartDiv, lumberOpts) {
-  // ...
-}
+  /*
+    pieChart
 
-lumber.scatterplot = lumber_scatterplot;
-function lumber_scatterplot(chartDiv, lumberOpts) {
-  // ...
-}
+    http://bl.ocks.org/mbostock/3887235
+   */
+  pieChart: function(chartDiv, lumberOpts) {
+    var width = 960,
+        height = 300,
+        radius = Math.min(width, height) / 2;
 
-lumber.stackedBar = lumber_stackedBar;
-function lumber_stackedBar(chartDiv, lumberOpts) {
-  // ...
-}
+    var color = d3.scale.category20b();
+
+    var arc = d3.svg.arc()
+        .outerRadius(radius - 10)
+        .innerRadius(0);
+
+    var pie = d3.layout.pie()
+        .sort(null)
+        .value(function(d) { return d.x; });
+
+    var svg = chartDiv
+        .attr("width", width)
+        .attr("height", height)
+      .append("g")
+        .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+    lumberOpts.data.forEach(function(d) {
+      d.x = +d.x;
+    });
+
+    var g = svg.selectAll(".arc")
+        .data(pie(lumberOpts.data))
+      .enter().append("g")
+        .attr("class", "arc");
+
+    g.append("path")
+        .attr("d", arc)
+        .style("fill", function(d) { return color(d.data.x); });
+
+    g.append("text")
+        .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
+        .attr("dy", ".35em")
+        .style("text-anchor", "middle")
+        .text(function(d) { return d.data.y; });
+  },
+
+  lineChart: function(chartDiv, lumberOpts) {
+    var margin = {top: 20, right: 30, bottom: 30, left: 40},
+        width  = lumberOpts.width - margin.left - margin.right,
+        height = lumberOpts.height - margin.top - margin.bottom;
+
+    var parseDate = d3.time.format("%d-%b-%y");
+    lumberOpts.data.forEach(function(dataPoint) {
+      dataPoint.x = parseDate.parse(dataPoint.x);
+      dataPoint.y = +dataPoint.y;
+    });
+
+    var x = d3.time.scale().range([0, width]);
+    var y = d3.scale.linear().range([height, 0]);
+
+    var xAxis = d3.svg.axis()
+        .scale(x)
+        .orient("bottom");
+
+    var yAxis = d3.svg.axis()
+        .scale(y)
+        .orient("left");
+
+    var line = d3.svg.line()
+        .x(function(d) { return x(d.x); })
+        .y(function(d) { return y(d.y); });
+
+    var svg = chartDiv
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+      x.domain(d3.extent(lumberOpts.data, function(d) { return d.x; }));
+      y.domain(d3.extent(lumberOpts.data, function(d) { return d.y; }));
+
+      svg.append("g")
+          .attr("class", "x axis")
+          .attr("transform", "translate(0," + height + ")")
+          .call(xAxis);
+
+      svg.append("g")
+          .attr("class", "y axis")
+          .call(yAxis)
+        .append("text")
+          .attr("transform", "rotate(-90)")
+          .attr("y", 6)
+          .attr("dy", ".71em")
+          .style("text-anchor", "end")
+          .text("Price ($)");
+
+      svg.append("path")
+          .datum(lumberOpts.data)
+          .attr("class", "line")
+          .attr("d", line);
+  },
+
+  histogram: function(chartDiv, lumberOpts) {
+
+  },
+
+  scatterplot: function(chartDiv, lumberOpts) {
+
+  },
+
+  stackedBar: function(chartDiv, lumberOpts) {
+
+  }
+};
 
 if (!hasLumberDependencies()) {
   console.log("Missing dependencies for lumber.js.");
