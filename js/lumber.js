@@ -187,8 +187,7 @@ var lumber = {
         height = 300,
         radius = Math.min(width, height) / 2;
 
-    var color = d3.scale.ordinal()
-      .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+    var color = d3.scale.category20b();
 
     var arc = d3.svg.arc()
         .outerRadius(radius - 10)
@@ -221,7 +220,7 @@ var lumber = {
         .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
         .attr("dy", ".35em")
         .style("text-anchor", "middle")
-        .text(function(d) { console.log(d.data.y); return d.data.y; });
+        .text(function(d) { return d.data.y; });
   },
 
   lineChart: function(chartDiv, lumberOpts) {
